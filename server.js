@@ -19,9 +19,6 @@ var config = {
  * App configuration
  * ====================================
  */
-//Use body parser so we can grab information from POST requests.
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 
 // Configure app to handle CORS requests
