@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--suppress JSUnresolvedLibraryURL -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Spark Automated Frontend Performance Tests</title>
+
+    <!-- Bootstrap -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Spark Automated Frontend Performance Tests</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Site <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="active"><a href="#">AccountingWEB UK</a></li>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid">
+    <h1>AccountingWEB UK - WebPageTest Results</h1>
+    <div id="chartdiv" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+</div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+
+        $.getJSON('data/accountingwebuk.json', function(data) {
+            console.log(data);
+            if (data == null || data == []) {
+                $('#chartdiv').after('<p>No data was found!</p>');
+            }
+            data = processData(data);
+
+            var chart = AmCharts.makeChart("chartdiv", {
+                "type": "serial",
+                "theme": "light",
+                "legend": {
+                    "useGraphSettings": true
+                },
+                "dataProvider": data,
+                "synchronizeGrid":true,
+                "valueAxes": [{
+                    "id":"v1",
+                    "axisColor": "#FF6600",
+                    "axisThickness": 2,
+                    "axisAlpha": 1,
+                    "position": "left"
+                }, {
+                    "id":"loadtimes",
+                    "axisColor": "#FCD202",
+                    "axisThickness": 2,
+                    "axisAlpha": 1,
+                    "offset": 50,
+                    "position": "left"
+                }, {
+                    "id":"pagesize",
+                    "axisColor": "#B0DE09",
+                    "axisThickness": 2,
+                    "gridAlpha": 0,
+                    "axisAlpha": 1,
+                    "position": "right"
+                }, {
+                    "id":"requests",
+                    "axisColor": "#563d7c",
+                    "axisThickness": 2,
+                    "gridAlpha": 0,
+                    "offset": 80,
+                    "axisAlpha": 1,
+                    "position": "right"
+                }],
+                "graphs": [{
+                    "valueAxis": "v1",
+                    "lineColor": "#FF6600",
+                    "bullet": "round",
+                    "bulletBorderThickness": 1,
+                    "hideBulletsCount": 30,
+                    "title": "First Byte Time (ms)",
+                    "type": "smoothedLine",
+                    "valueField": "firstTimeByte",
+                    "balloonText": "[[value]] ms",
+                    "fillAlphas": 0
+                }, {
+                    "valueAxis": "loadtimes",
+                    "lineColor": "#FC0000",
+                    "bullet": "square",
+                    "bulletBorderThickness": 1,
+                    "hideBulletsCount": 30,
+                    "title": "Full load time (ms)",
+                    "type": "smoothedLine",
+                    "valueField": "fullLoadTime",
+                    "balloonText": "[[value]] ms",
+                    "fillAlphas": 0
+                }, {
+                    "valueAxis": "loadtimes",
+                    "lineColor": "#FCD202",
+                    "bullet": "triangleUp",
+                    "bulletBorderThickness": 1,
+                    "hideBulletsCount": 30,
+                    "title": "Load time (ms)",
+                    "type": "smoothedLine",
+                    "valueField": "loadTime",
+                    "balloonText": "[[value]] ms",
+                    "fillAlphas": 0
+                }, {
+                    "valueAxis": "pagesize",
+                    "lineColor": "#B0DE09",
+                    "bullet": "triangleUp",
+                    "bulletBorderThickness": 1,
+                    "hideBulletsCount": 30,
+                    "title": "Page size (bytes)",
+                    "type": "smoothedLine",
+                    "valueField": "pageSize",
+                    "balloonText": "[[value]] bytes",
+                    "fillAlphas": 0
+                }, {
+                    "valueAxis": "requests",
+                    "lineColor": "#563d7c",
+                    "bullet": "triangleUp",
+                    "bulletBorderThickness": 1,
+                    "hideBulletsCount": 30,
+                    "title": "Total Requests",
+                    "type": "smoothedLine",
+                    "valueField": "totalRequests",
+                    "balloonText": "[[value]]",
+                    "fillAlphas": 0
+                }],
+                "chartScrollbar": {},
+                "chartCursor": {
+                    "cursorPosition": "mouse",
+                    "categoryBalloonEnabled": false
+                },
+                "categoryField": "date",
+                "categoryAxis": {
+                    "parseDates": false,
+                    "axisColor": "#DADADA",
+                    "minorGridEnabled": true,
+                    "labelFunction": function(valueText, date, categoryAxis) {
+                        var date = new Date(valueText);
+                        var year = date.getFullYear();
+                        var month = date.getMonth() + 1;
+                        var day = date.getDate();
+                        var minutes = date.getMinutes();
+                        var seconds = date.getSeconds();
+                        return day + '/' + month + '/' + year + '<br>' + minutes + ':' + seconds;
+                    }
+                },
+                "export": {
+                    "enabled": true,
+                    "position": "bottom-right"
+                }
+            });
+
+            function processData(data) {
+                for (var i = 0; i < data.length; i++) {
+                    data[i].date = convertUnixtoDate(data[i].date);
+                }
+
+                data.sort(compare);
+                return data;
+            }
+
+            function compare(a,b) {
+                if (a.date < b.date)
+                    return -1;
+                if (a.date > b.date)
+                    return 1;
+                return 0;
+            }
+
+            function convertUnixtoDate(unix) {
+                // Create a new JavaScript Date object based on the timestamp
+                // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+                var date = new Date(unix*1000);
+                return date;
+            }
+
+        });
+
+    });
+</script>
+</body>
+</html>
