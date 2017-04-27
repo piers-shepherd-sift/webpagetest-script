@@ -108,7 +108,7 @@ var testLog = {
    */
   logEvent: function (event) {
 
-    var logFile = 'logs/events.json';
+    var logFile = __dirname  + '/logs/events.json';
     var logMessage = {
       date: new Date(),
       event: event
@@ -139,7 +139,7 @@ var testError = {
    */
   logError: function (error, type) {
 
-    var errorFile = 'logs/errors.' + type + '.json';
+    var errorFile = __dirname + '/logs/errors.' + type + '.json';
     var errorMessage = {
       date: new Date(),
       error: error
