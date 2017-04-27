@@ -6,8 +6,10 @@ var WebPageTest = require('webpagetest');
 var async = require('async');
 
 // INIT VARIABLES.
-var wpt = new WebPageTest('www.webpagetest.org', 'A.3ad46027b206962f8077da9392a77a7f');
+//var wpt = new WebPageTest('www.webpagetest.org', 'A.3ad46027b206962f8077da9392a77a7f');
 //var wpt = new WebPageTest('www.webpagetest.org', 'A.1783f82bf0de8612caed1fc80906a26b');
+var wpt = new WebPageTest('www.webpagetest.org', 'A.5f7b372fcec2b4c46b17ab609d1c93af'); 
+
 var dataFolder = 'multidata';
 // @todo: move this to a config file?
 var tests = {
