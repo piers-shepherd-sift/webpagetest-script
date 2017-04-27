@@ -6,8 +6,11 @@ var WebPageTest = require('webpagetest');
 var async = require('async');
 
 // INIT VARIABLES.
-//var wpt = new WebPageTest('www.webpagetest.org', 'A.3ad46027b206962f8077da9392a77a7f');
+// PS - Sift.
 //var wpt = new WebPageTest('www.webpagetest.org', 'A.1783f82bf0de8612caed1fc80906a26b');
+// JL - Sift.
+//var wpt = new WebPageTest('www.webpagetest.org', 'A.3ad46027b206962f8077da9392a77a7f');
+// JL - personal.
 var wpt = new WebPageTest('www.webpagetest.org', 'A.5f7b372fcec2b4c46b17ab609d1c93af'); 
 
 var dataFolder = 'multidata';
@@ -15,6 +18,7 @@ var dataFolder = 'multidata';
 var tests = {
   awuk: {
     url: 'http://www.accountingweb.co.uk',
+    location: 'Manchester',
     pages: {
       homepage: '/',
       login: '/user/login',
@@ -28,6 +32,7 @@ var tests = {
   },
   awus: {
     url: 'http://www.accountingweb.com',
+    location: 'NewYork',
     pages: {
       homepage: '/',
       login: '/user/login',
@@ -41,6 +46,7 @@ var tests = {
   },
   bzone: {
     url: 'http://www.businesszone.co.uk',
+    location: 'Manchester',
     pages: {
       homepage: '/',
       login: '/user/login',
@@ -54,6 +60,7 @@ var tests = {
   },
   hrzone: {
     url: 'http://www.hrzone.com',
+    location: 'Manchester',
     pages: {
       homepage: '/',
       login: '/user/login',
@@ -67,6 +74,7 @@ var tests = {
   },
   trzone: {
     url: 'http://www.trainingzone.co.uk',
+    location: 'Manchester',
     pages: {
       homepage: '/',
       login: '/user/login',
@@ -80,6 +88,7 @@ var tests = {
   },
   myc: {
     url: 'http://www.mycustomer.com',
+    location: 'Manchester',
     pages: {
       homepage: '/',
       login: '/user/login',
@@ -165,7 +174,7 @@ for (var site in tests) {
         var pageType = page;
         var url = tests[site].url + pageUrl;
         var params = {
-          location: 'Manchester',
+          location: tests[site].location,
           connectivity: 'DSL',
           pollResults: 30,
           timeout: 5000
