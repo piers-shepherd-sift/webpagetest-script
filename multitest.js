@@ -13,7 +13,7 @@ var async = require('async');
 // JL - personal.
 var wpt = new WebPageTest('www.webpagetest.org', 'A.5f7b372fcec2b4c46b17ab609d1c93af'); 
 
-var dataFolder = 'multidata';
+var dataFolder = __dirname  + '/multidata';
 // @todo: move this to a config file?
 var tests = {
   awuk: {
