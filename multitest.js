@@ -18,7 +18,7 @@ var dataFolder = 'multidata';
 var tests = {
   awuk: {
     url: 'http://www.accountingweb.co.uk',
-    location: 'Manchester',
+    location: 'ec2-eu-west-1',
     pages: {
       homepage: '/',
       login: '/user/login',
@@ -32,7 +32,7 @@ var tests = {
   },
   awus: {
     url: 'http://www.accountingweb.com',
-    location: 'NewYork',
+    location: 'Dulles',
     pages: {
       homepage: '/',
       login: '/user/login',
@@ -46,7 +46,7 @@ var tests = {
   },
   bzone: {
     url: 'http://www.businesszone.co.uk',
-    location: 'Manchester',
+    location: 'ec2-eu-west-1',
     pages: {
       homepage: '/',
       login: '/user/login',
@@ -60,7 +60,7 @@ var tests = {
   },
   hrzone: {
     url: 'http://www.hrzone.com',
-    location: 'Manchester',
+    location: 'ec2-eu-west-1',
     pages: {
       homepage: '/',
       login: '/user/login',
@@ -74,7 +74,7 @@ var tests = {
   },
   trzone: {
     url: 'http://www.trainingzone.co.uk',
-    location: 'Manchester',
+    location: 'ec2-eu-west-1',
     pages: {
       homepage: '/',
       login: '/user/login',
@@ -88,7 +88,7 @@ var tests = {
   },
   myc: {
     url: 'http://www.mycustomer.com',
-    location: 'Manchester',
+    location: 'ec2-eu-west-1',
     pages: {
       homepage: '/',
       login: '/user/login',
