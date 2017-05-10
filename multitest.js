@@ -9,9 +9,9 @@ var async = require('async');
 // PS - Sift.
 //var wpt = new WebPageTest('www.webpagetest.org', 'A.1783f82bf0de8612caed1fc80906a26b');
 // JL - Sift.
-//var wpt = new WebPageTest('www.webpagetest.org', 'A.3ad46027b206962f8077da9392a77a7f');
+var wpt = new WebPageTest('www.webpagetest.org', 'A.3ad46027b206962f8077da9392a77a7f');
 // JL - personal.
-var wpt = new WebPageTest('www.webpagetest.org', 'A.5f7b372fcec2b4c46b17ab609d1c93af'); 
+//var wpt = new WebPageTest('www.webpagetest.org', 'A.5f7b372fcec2b4c46b17ab609d1c93af'); 
 
 var dataFolder = __dirname  + '/multidata';
 // @todo: move this to a config file?
@@ -177,7 +177,6 @@ for (var site in tests) {
           location: tests[site].location,
           connectivity: 'DSL',
           pollResults: 30,
-          timeout: 5000
         };
         testLog.logEvent(site.toUpperCase() + ' - Running WebPageTest against ' + pageType + ':' + url);
 
