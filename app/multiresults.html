@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--suppress JSUnresolvedLibraryURL -->
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Spark Automated Frontend Performance Tests</title>
+
+        <!-- Bootstrap -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Spark Automated Frontend Performance Tests</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Site <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="awuk-tab"><a href="/awuk">AccountingWEB UK</a></li>
+                                <li class="awus-tab"><a href="/awus">AccountingWEB US</a></li>
+                                <li class="trzone-tab"><a href="/trzone">TrainingZone</a></li>
+                                <li class="hrzone-tab"><a href="/hrzone">HrZone</a></li>
+                                <li class="bzone-tab"><a href="/bzone">BusinessZoneK</a></li>
+                                <li class="myc-tab"><a href="/myc">MyCustomer</a></li>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div class="container-fluid">
+            <h1 id="site-name">AccountingWEB UK - WebPageTest Results</h1>
+            <div class="chart-container col-md-6">
+                <h2>Homepage</h2>
+                <div id="chart-homepage" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+            </div>
+
+            <div class="chart-container col-md-6">
+                <h2>Register</h2>
+                <div id="chart-register" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+            </div></div>
+
+            <div class="chart-container col-md-6">
+                <h2>Login</h2>
+                <div id="chart-login" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+            </div>
+
+            <div class="chart-container col-md-6">
+                <h2>Profile</h2>
+                <div id="chart-profile" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+            </div>
+
+            <div class="chart-container col-md-6">
+                <h2>Any answers overview</h2>
+                <div id="chart-anyanswers_overview" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+            </div>
+
+            <div class="chart-container col-md-6">
+                <h2>Topic page</h2>
+                <div id="chart-topic_page" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+            </div>
+
+            <div class="chart-container col-md-6">
+                <h2>Any answers post</h2>
+                <div id="chart-anyanswers_post" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+            </div>
+
+            <div class="chart-container col-md-6">
+                <h2>Article post</h2>
+                <div id="chart-article_post" style="min-width: 310px; height: 600px; margin: 0 auto"></div>
+            </div>
+        </div>
+
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+        <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+        <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+        <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+
+        <script src="/js/main.js"></script>
+
+    </body>
+</html>

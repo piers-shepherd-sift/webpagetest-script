@@ -28,15 +28,26 @@ app.use(function(req, res, next) {
     next();
 });
 
-
-app.use('/data', express.static('data'));
+app.use('/multidata', express.static('multidata'));
+app.use('/js', express.static('js'));
 app.use('/errors', express.static('errors'));
 app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname+'/app/results.html'));
-})
+var routes = [
+    '/',
+    '/awuk',
+    '/awus',
+    '/trzone',
+    '/hrzone',
+    '/bzone',
+    '/myc'
+];
 
+for (var i = 0; i < routes.length; i++) {
+    app.get(routes[i], function (req, res) {
+        res.sendFile(path.join(__dirname + '/app/multiresults.html'));
+    });
+}
 
 /**
  * Start server
