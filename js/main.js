@@ -68,6 +68,12 @@ $(document).ready(function() {
     for (var i = 0; i < data.length; i++) {
       pageName = data[i]['sparkPageType'];
 
+      // @todo: We've colleted data with undefined values. This avoid parseDates to throw an error.
+      // @todo: but we should know why is really happening.
+      if (data[i].date === undefined) {
+        continue;
+      }
+
       if (dataProcessed[pageName] === undefined) {
         dataProcessed[pageName] = [];
       }
@@ -303,18 +309,16 @@ $(document).ready(function() {
     },
     "categoryField": "date",
     "categoryAxis": {
-      "parseDates": false,
+      "parseDates": true,
+      "equalSpacing": true,
+      "dateFormats": [
+        {"period":"DD","format":"DD MMM"},
+        {"period":"WW","format":"DD MMM"},
+        {"period":"MM","format":"MMM"},
+        {"period":"YYYY","format":"YYYY"}
+      ],
       "axisColor": "#DADADA",
-      "minorGridEnabled": true,
-      "labelFunction": function(valueText, date, categoryAxis) {
-        var date = new Date(valueText);
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        var day = date.getDate();
-        var minutes = date.getMinutes();
-        var seconds = date.getSeconds();
-        return day + '/' + month /*+ '/' + year + '<br>' + minutes + ':' + seconds*/;
-      }
+      "autoGridCount": true,
     },
     "export": {
       "enabled": true,
@@ -324,7 +328,9 @@ $(document).ready(function() {
 
   $.getJSON('multidata/' + site + '.json', function(data) {
 
+
     data = processData(data);
+    console.log(data);
     var sections = [
       'homepage',
       'login',
@@ -342,9 +348,9 @@ $(document).ready(function() {
       if (data == null || data == []) {
         $('#chart-' + section).after('<p>No data was found!</p>');
       }
-      var homepageSettings = clone(chartSettings);
-      homepageSettings.dataProvider = data[section];
-      var chart = AmCharts.makeChart("chart-" + section, homepageSettings);
+      var sectionSettings = clone(chartSettings);
+      sectionSettings.dataProvider = data[section];
+      var chart = AmCharts.makeChart("chart-" + section, sectionSettings);
     }
   });
 
