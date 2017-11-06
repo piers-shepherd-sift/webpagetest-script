@@ -69,7 +69,7 @@ var tests = {
       anyanswers_overview: '/community-voice/discuss',
       topic_page: '/lead',
       anyanswers_post: '/community/discuss/payroll',
-      article_post: 'talent/acquisition/avoiding-game-over-incorporating-gamification-successfully-into-recruitment-and',
+      article_post: '/talent/acquisition/avoiding-game-over-incorporating-gamification-successfully-into-recruitment-and',
     }
   },
   trzone: {
