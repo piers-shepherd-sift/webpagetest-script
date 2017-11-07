@@ -63,12 +63,13 @@ $(document).ready(function() {
     // Store measure values.
     var measureValue, averageValue;
     // Helpers.
-    //var divisor;
+    var averageItems;
 
     for (var i = 0; i < data.length; i++) {
       pageName = data[i]['sparkPageType'];
 
-      // @todo: We've colleted data with undefined values. This avoid parseDates to throw an error.
+      // @todo: We've colleted dates with undefined values.
+      // @todo: This avoid parseDates to throw an error.
       // @todo: but we should know why is really happening.
       if (data[i].date === undefined) {
         continue;
@@ -95,11 +96,29 @@ $(document).ready(function() {
 
             // Converts Bytes to MB and ms to s.
             measureValue = data[i][view][measuredParameter];
-            measureValue = measuredParameter === 'totalRequests' ? measureValue : (measuredParameter === 'pageSize' ? measureValue / (1024 * 1024) : measureValue / 1000);
-            // Compute the current point value as the AVERAGE of the measures so far to avoid pronounced peaks.
-            dataProcessed[pageName][currentItem][measuredParameterViewAcc] = currentItem === 0 ? measureValue : dataProcessed[pageName][lastItem][measuredParameterViewAcc] + measureValue;
-            averageValue = dataProcessed[pageName][currentItem][measuredParameterViewAcc] / (currentItem + 1);
+            measureValue = (measuredParameter === 'totalRequests') ? measureValue : (measuredParameter === 'pageSize' ? measureValue / (1024 * 1024) : measureValue / 1000);
 
+            // Store the measure accumulator to compute the
+            // average afterwards.
+            dataProcessed[pageName][currentItem][measuredParameterViewAcc] = (currentItem === 0) ? measureValue : dataProcessed[pageName][lastItem][measuredParameterViewAcc] + measureValue;
+
+            // @todo: there are some measures without value. This creates a fake
+            // @todo: value for the accumulated variable to not cut suddenly the graph.
+            if (isNaN(dataProcessed[pageName][currentItem][measuredParameterViewAcc])) {
+              dataProcessed[pageName][currentItem][measuredParameterViewAcc] = measureValue * (currentItem + 1);
+            }
+
+            // Compute the current point value as the AVERAGE of the last 'averageItems'
+            // measures to avoid pronounced peaks. IMPORTANT: the lower this value is the
+            // more sensitive to changes the graph will be (good to find out performance
+            // changes easier - bad to the graph understanding).
+            averageItems = 30;
+            if (currentItem - averageItems >= 0) {
+              averageValue = (dataProcessed[pageName][currentItem][measuredParameterViewAcc] - dataProcessed[pageName][currentItem - averageItems][measuredParameterViewAcc]) / averageItems;
+            }
+            else {
+              averageValue = dataProcessed[pageName][currentItem][measuredParameterViewAcc] / (currentItem + 1);
+            }
             // Round to two decimals.
             dataProcessed[pageName][currentItem][measuredParameterView] = Math.round(averageValue * 100) / 100;
           }
@@ -328,9 +347,9 @@ $(document).ready(function() {
 
   $.getJSON('multidata/' + site + '.json', function(data) {
 
-
+    //console.log(data);
     data = processData(data);
-    console.log(data);
+    //console.log(data);
     var sections = [
       'homepage',
       'login',
